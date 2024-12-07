@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Richiesta fattura ordine</title>
+  <!-- <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" /> -->
+  <link rel="stylesheet" href="./assets/css/styles.min.css" />
+</head>
+
+<body>
+  <div class="body-wrapper">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title fw-semibold mb-4">Richiesta fattura ordine</h5>
+          <p>
+            Compila i campi per richiedere la fattura del tuo ordine.
+          </p>
+          <p class="text-danger">
+            * Indica una domanda obbligatoria
+          </p>
+          <div class="card">
+            <div class="card-body">
+              <form class="needs-validation" novalidate action="https://webhook-hub-production.up.railway.app/fatture/richiesta" method="POST">
+                <div class="mb-3">
+                  <label for="order_number" class="form-label">Numero ordine <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="order_number" name="order_number" placeholder="La tua risposta" required>
+                  <div class="invalid-feedback">
+                    Questa è una domanda obbligatoria
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="mb-2">
+                    <span class="form-label">Metodo di pagamento <span class="text-danger">*</span></span>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment" id="cartaOn">
+                    <label class="form-check-label" for="cartaOn">
+                      Carta di credito/debito/prepagata
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment" id="paypalOn">
+                    <label class="form-check-label" for="paypalOn">
+                      Paypal
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment" id="klarnaOn">
+                    <label class="form-check-label" for="klarnaOn">
+                      Pagamento a rate (Klarna)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment" id="bonificoOn">
+                    <label class="form-check-label" for="bonificoOn">
+                      Bonifico
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment" id="codOn">
+                    <label class="form-check-label" for="codOn">
+                      Pagamento alla consegna
+                    </label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Importo ordine con iva compresa <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="amount" name="amount" placeholder="La tua risposta" required>
+                  <div class="invalid-feedback">
+                    Questa è una domanda obbligatoria
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Nome e cognome / Ragione Sociale <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="La tua risposta" required>
+                  <div class="invalid-feedback">
+                    Questa è una domanda obbligatoria
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Numero di telefono <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="La tua risposta" required>
+                  <div class="invalid-feedback">
+                    Questa è una domanda obbligatoria
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="address" class="form-label">Indirizzo di fatturazione (Con CAP) <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="address" name="address" placeholder="La tua risposta" required>
+                  <div class="invalid-feedback">
+                    Questa è una domanda obbligatoria
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="piva" class="form-label">Partita iva <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="piva" name="piva" placeholder="La tua risposta" required>
+                  <div class="invalid-feedback">
+                    Questa è una domanda obbligatoria
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="cf" class="form-label">Codice fiscale <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="cf" name="cf" placeholder="La tua risposta" required>
+                  <div class="invalid-feedback">
+                    Questa è una domanda obbligatoria
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="sdi_pec" class="form-label">Codice Univoco (SDI) o pec <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="sdi_pec" name="sdi_pec" placeholder="La tua risposta" required>
+                  <div class="invalid-feedback">
+                    Questa è una domanda obbligatoria
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Invia</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
+  <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/js/sidebarmenu.js"></script>
+  <script src="./assets/js/app.min.js"></script>
+  <script src="./assets/libs/simplebar/dist/simplebar.js"></script>
+</body>
+
+</html>
