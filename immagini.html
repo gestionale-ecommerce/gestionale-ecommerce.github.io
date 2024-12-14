@@ -40,8 +40,10 @@
       .then((response) => response.json())
       .then((response) => {
         console.log(response)
-        if (response == "") {
+        if (response == "OK") {
           document.getElementById("result").innerHTML = "La richiesta è stata registrata con successo."
+        } else if (response == "KO") {
+          document.getElementById("result").innerHTML = "SERVER ERROR"
         } else {
           let text = "<ul>"
           for (let i in response) {
