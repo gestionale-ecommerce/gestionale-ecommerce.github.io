@@ -118,7 +118,8 @@
                 </div>
                 <div class="mb-3">
                   <label for="piva" class="form-label">Partita iva <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="piva" name="piva" placeholder="La tua risposta" required>
+                  <input type="text" class="form-control" id="piva" name="piva" placeholder="La tua risposta" required pattern=".*[0-9].*">
+                  <!-- pattern="^((AT)*(U\d{8})|(BE)*(\d{10})|(BG)*(\d{9,10})|(CY)*(\d{8}[LX])|(CZ)*(\d{8,10})|(DE)*(\d{9})|(DK)*(\d{8})|(EE)*(\d{9})|(EL|GR)*(\d{9})|(ES)*([\dA-Z]\d{7}[\dA-Z])|(FI)*(\d{8})|(FR)*([\dA-Z]{2}\d{9})|(GB)*(\d{9}|\d{12})|(GB)*(GD)(\d{3})|(GB)*(HA)(\d{3})|(HR)*(\d{11})|(HU)*(\d{8})|(IE)*(\d{7}[A-Z]{1,2})|(IE)*(\d[A-Z]\d{5}[A-Z]{1})|(IT)*(\d{11})|(LT)*(\d{9}|\d{12})|(LU)*(\d{8})|(LV)*(\d{11})|(MT)*(\d{8})|(NL)*(\d{9}(B\d{2}|BO2))|(PL)*(\d{10})|(PT)*(\d{9})|(RO)*(\d{2,10})|(SE)*(\d{12})|(SI)*(\d{8})|(SK)*(\d{10}))$" -->
                   <div class="invalid-feedback">
                     Questa è una domanda obbligatoria
                   </div>
