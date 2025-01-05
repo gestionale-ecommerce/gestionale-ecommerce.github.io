@@ -68,7 +68,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="amount" class="form-label">Importo ordine con iva compresa <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="amount" name="amount" placeholder="La tua risposta" required>
+                  <input type="text" class="form-control" id="amount" name="amount" placeholder="La tua risposta" required pattern=".*[0-9].*">
                   <div class="invalid-feedback">
                     Questa è una domanda obbligatoria
                   </div>
@@ -138,7 +138,7 @@
                     Questa è una domanda obbligatoria
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Invia</button>
+                <button type="submit" class="btn btn-primary" id="submitButton">Invia</button>
               </form>
             </div>
           </div>
@@ -162,6 +162,7 @@
           }
 
           form.classList.add('was-validated')
+          document.getElementById("submitButton").disabled = true
         }, false)
       })
     })()
