@@ -26,7 +26,7 @@
               <form class="needs-validation" novalidate action="https://webhook-hub-production.up.railway.app/fatture/nsorders" method="POST">
                 <div class="mb-3">
                   <label for="order_number" class="form-label">Numero ordine <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="order_number" name="order_number" placeholder="La tua risposta" required>
+                  <input type="text" class="form-control" id="order_number" name="order_number" placeholder="La tua risposta" required pattern=".*[0-9].*">
                   <div class="invalid-feedback">
                     Questa è una domanda obbligatoria
                   </div>
