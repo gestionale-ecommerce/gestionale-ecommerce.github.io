@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Richiesta fattura ordine</title>
-  <!-- <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" /> -->
   <link rel="stylesheet" href="./assets/css/styles.min.css" />
 </head>
 
@@ -14,130 +13,158 @@
     <div class="container-fluid">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title fw-semibold mb-4">Richiesta fattura NeibacShop</h5>
-          <p>
+          <div class="d-flex justify-content-between mb-3">
+            <h5 class="card-title fw-semibold mb-4" id="title">Richiesta fattura NeibacShop</h5>
+            <select id="languageSelector" class="form-select w-auto">
+              <option value="it">Italiano</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+          <p id="description">
             Compila i campi per richiedere la fattura del tuo ordine.
           </p>
-          <p class="text-danger">
+          <p class="text-danger" id="mandatoryNote">
             * Indica una domanda obbligatoria
           </p>
           <div class="card">
             <div class="card-body">
               <form class="needs-validation" novalidate action="https://webhook-hub-production.up.railway.app/fatture/nsorders" method="POST">
                 <div class="mb-3">
-                  <label for="order_number" class="form-label">Numero ordine <span class="text-danger">*</span></label>
+                  <label for="order_number" class="form-label" id="orderNumberLabel">Numero ordine <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="order_number" name="order_number" placeholder="La tua risposta" required pattern=".*[0-9].*">
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
+                  <div class="invalid-feedback" id="orderNumberFeedback">
+                    Questa è una domanda obbligatoria. Deve contenere almeno un numero.
                   </div>
                 </div>
                 <div class="mb-3">
                   <div class="mb-2">
-                    <span class="form-label">Metodo di pagamento <span class="text-danger">*</span></span>
+                    <span class="form-label" id="paymentMethodLabel">Metodo di pagamento <span class="text-danger">*</span></span>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="payment" id="cartaOn" value="Carta">
-                    <label class="form-check-label" for="cartaOn">
+                    <label class="form-check-label" for="cartaOn" id="paymentCard">
                       Carta di credito/debito/prepagata
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="payment" id="paypalOn" value="PayPal">
-                    <label class="form-check-label" for="paypalOn">
+                    <label class="form-check-label" for="paypalOn" id="paymentPayPal">
                       PayPal
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="payment" id="klarnaOn" value="Klarna">
-                    <label class="form-check-label" for="klarnaOn">
+                    <label class="form-check-label" for="klarnaOn" id="paymentKlarna">
                       Pagamento a rate (Klarna)
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="payment" id="bonificoOn" value="Bonifico">
-                    <label class="form-check-label" for="bonificoOn">
+                    <label class="form-check-label" for="bonificoOn" id="paymentBonifico">
                       Bonifico
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="payment" id="codOn" value="Pagamento alla consegna">
-                    <label class="form-check-label" for="codOn">
+                    <label class="form-check-label" for="codOn" id="paymentCOD">
                       Pagamento alla consegna
                     </label>
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="amount" class="form-label">Importo ordine con iva compresa <span class="text-danger">*</span></label>
+                  <label for="amount" class="form-label" id="amountLabel">Importo ordine con iva compresa <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="amount" name="amount" placeholder="La tua risposta" required pattern=".*[0-9].*">
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
+                  <div class="invalid-feedback" id="amountFeedback">
+                  Questa è una domanda obbligatoria. Deve contenere almeno un numero.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="name" class="form-label">Nome e cognome / Ragione Sociale <span class="text-danger">*</span></label>
+                  <label for="name" class="form-label" id="nameLabel">Nome e cognome / Ragione Sociale <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="name" name="name" placeholder="La tua risposta" required>
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
+                  <div class="invalid-feedback" id="nameFeedback">
+                  Questa è una domanda obbligatoria.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="phone" class="form-label">Numero di telefono <span class="text-danger">*</span></label>
+                  <label for="phone" class="form-label" id="phoneLabel">Numero di telefono <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="phone" name="phone" placeholder="La tua risposta" required>
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
+                  <div class="invalid-feedback" id="phoneFeedback">
+                  Questa è una domanda obbligatoria.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="address" class="form-label">Indirizzo di fatturazione <span class="text-danger">*</span></label>
+                  <label for="address" class="form-label" id="addressLabel">Indirizzo di fatturazione <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="address" name="address" placeholder="La tua risposta" required>
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
+                  <div class="invalid-feedback" id="addressFeedback">
+                  Questa è una domanda obbligatoria.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="cap" class="form-label">CAP <span class="text-danger">*</span></label>
+                  <label for="cap" class="form-label" id="zipLabel">CAP <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="cap" name="cap" placeholder="La tua risposta" required>
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
+                  <div class="invalid-feedback" id="zipFeedback">
+                  Questa è una domanda obbligatoria.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="city" class="form-label">Comune e provincia <span class="text-danger">*</span></label>
+                  <label for="city" class="form-label" id="cityLabel">Comune e provincia <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="city" name="city" placeholder="La tua risposta" required>
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
+                  <div class="invalid-feedback" id="cityFeedback">
+                  Questa è una domanda obbligatoria.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="country" class="form-label">Paese (es. IT) <span class="text-danger">*</span></label>
-                  <!-- <input type="text" class="form-control" id="country" name="country" placeholder="La tua risposta" required> -->
-                  <select class="form-control" id="country" name="country" required></select>
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
+                  <label for="country" class="form-label" id="countryLabel">Paese (es. IT) <span class="text-danger">*</span></label>
+                  <select class="form-control" id="country" name="country" required>
+                  <option value="">Seleziona un paese</option>
+                  </select>
+                  <div class="invalid-feedback" id="countryFeedback">
+                  Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <script>
+                  document.getElementById("country").addEventListener("change", (event) => {
+                  const selectedCountry = event.target.value;
+                  const sdiPecField = document.getElementById("sdi_pec");
+                  if (selectedCountry === "IT") {
+                    sdiPecField.value = "";
+                  } else {
+                    sdiPecField.value = "XXXXXXX";
+                  }
+                  });
+                </script>
+                <div class="mb-3">
+                  <label for="piva" class="form-label" id="pivaLabel">Partita iva <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="piva" name="piva" placeholder="La tua risposta" required pattern=".*[0-9].*[0-9].*[0-9].*|^RO(\d{2,10})">
+                  <div class="invalid-feedback" id="pivaFeedback">
+                  Questa è una domanda obbligatoria. La partita iva deve essere valida.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="piva" class="form-label">Partita iva <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="piva" name="piva" placeholder="La tua risposta" required pattern=".*[0-9].*">
-                  <!-- pattern="^((AT)*(U\d{8})|(BE)*(\d{10})|(BG)*(\d{9,10})|(CY)*(\d{8}[LX])|(CZ)*(\d{8,10})|(DE)*(\d{9})|(DK)*(\d{8})|(EE)*(\d{9})|(EL|GR)*(\d{9})|(ES)*([\dA-Z]\d{7}[\dA-Z])|(FI)*(\d{8})|(FR)*([\dA-Z]{2}\d{9})|(GB)*(\d{9}|\d{12})|(GB)*(GD)(\d{3})|(GB)*(HA)(\d{3})|(HR)*(\d{11})|(HU)*(\d{8})|(IE)*(\d{7}[A-Z]{1,2})|(IE)*(\d[A-Z]\d{5}[A-Z]{1})|(IT)*(\d{11})|(LT)*(\d{9}|\d{12})|(LU)*(\d{8})|(LV)*(\d{11})|(MT)*(\d{8})|(NL)*(\d{9}(B\d{2}|BO2))|(PL)*(\d{10})|(PT)*(\d{9})|(RO)*(\d{2,10})|(SE)*(\d{12})|(SI)*(\d{8})|(SK)*(\d{10}))$" -->
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <label for="cf" class="form-label">Codice fiscale <span class="text-danger">*</span></label>
+                  <label for="cf" class="form-label" id="cfLabel">Codice fiscale <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="cf" name="cf" placeholder="La tua risposta" required>
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
+                  <div class="invalid-feedback" id="cfFeedback">
+                  Questa è una domanda obbligatoria.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="sdi_pec" class="form-label">Codice Univoco (SDI) o pec (Se la partita iva non è italiana, inserisci 7 volte X es. XXXXXXX) <span class="text-danger">*</span></label>
+                  <label for="sdi_pec" class="form-label" id="sdiPecLabel">Codice Univoco SDI / PEC (solo se la partita iva è italiana, altrimenti inserire XXXXXXX) <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="sdi_pec" name="sdi_pec" placeholder="La tua risposta" required>
-                  <div class="invalid-feedback">
-                    Questa è una domanda obbligatoria
+                  <div class="invalid-feedback" id="sdiPecFeedback">
+                  Questa è una domanda obbligatoria.
                   </div>
                 </div>
+                <script>
+                  document.getElementById("languageSelector").addEventListener("change", (event) => {
+                  const selectedLang = event.target.value;
+                  const sdiPecField = document.getElementById("sdi_pec");
+                  if (selectedLang === "it") {
+                    sdiPecField.value = "";
+                  } else if (selectedLang === "en") {
+                    sdiPecField.value = "XXXXXXX";
+                  }
+                  });
+                </script>
                 <button type="submit" class="btn btn-primary" id="submitButton">Invia</button>
               </form>
             </div>
@@ -430,6 +457,127 @@
       text += `<option value="${i}">${countryListAlpha2[i]} (${i})</option>`
     }
     document.getElementById("country").innerHTML = text
+  </script>
+  <script>
+    const translations = {
+      it: {
+        title: "Richiesta fattura NeibacShop",
+        description: "Compila i campi per richiedere la fattura del tuo ordine.",
+        mandatoryNote: "* Indica una domanda obbligatoria",
+        orderNumberLabel: "Numero ordine <span class='text-danger'>*</span>",
+        orderNumberFeedback: "Questa è una domanda obbligatoria. Deve contenere almeno un numero.",
+        paymentMethodLabel: "Metodo di pagamento <span class='text-danger'>*</span>",
+        paymentCard: "Carta di credito/debito/prepagata",
+        paymentPayPal: "PayPal",
+        paymentKlarna: "Pagamento a rate (Klarna)",
+        paymentBonifico: "Bonifico",
+        paymentCOD: "Pagamento alla consegna",
+        amountLabel: "Importo ordine con iva compresa <span class='text-danger'>*</span>",
+        amountFeedback: "Questa è una domanda obbligatoria. Deve contenere almeno un numero.",
+        nameLabel: "Nome e cognome / Ragione Sociale <span class='text-danger'>*</span>",
+        nameFeedback: "Questa è una domanda obbligatoria.",
+        phoneLabel: "Numero di telefono <span class='text-danger'>*</span>",
+        phoneFeedback: "Questa è una domanda obbligatoria.",
+        addressLabel: "Indirizzo di fatturazione <span class='text-danger'>*</span>",
+        addressFeedback: "Questa è una domanda obbligatoria.",
+        zipLabel: "CAP <span class='text-danger'>*</span>",
+        zipFeedback: "Questa è una domanda obbligatoria.",
+        cityLabel: "Comune e provincia <span class='text-danger'>*</span>",
+        cityFeedback: "Questa è una domanda obbligatoria.",
+        countryLabel: "Paese (es. IT) <span class='text-danger'>*</span>",
+        countryFeedback: "Questa è una domanda obbligatoria.",
+        pivaLabel: "Partita iva <span class='text-danger'>*</span>",
+        pivaFeedback: "Questa è una domanda obbligatoria. La partita iva deve essere valida.",
+        cfLabel: "Codice fiscale <span class='text-danger'>*</span>",
+        cfFeedback: "Questa è una domanda obbligatoria.",
+        sdiPecLabel: "Codice Univoco SDI / PEC (solo se la partita iva è italiana, altrimenti inserire XXXXXXX) <span class='text-danger'>*</span>",
+        sdiPecFeedback: "Questa è una domanda obbligatoria.",
+        submitButton: "Invia"
+      },
+      en: {
+        title: "Invoice Request NeibacShop",
+        description: "Fill in the fields to request the invoice for your order.",
+        mandatoryNote: "* Indicates a mandatory question",
+        orderNumberLabel: "Order number <span class='text-danger'>*</span>",
+        orderNumberFeedback: "This is a mandatory question. Must contain at least one number.",
+        paymentMethodLabel: "Payment method <span class='text-danger'>*</span>",
+        paymentCard: "Credit/Debit/Prepaid card",
+        paymentPayPal: "PayPal",
+        paymentKlarna: "Installment payment (Klarna)",
+        paymentBonifico: "Bank transfer",
+        paymentCOD: "Cash on delivery",
+        amountLabel: "Order amount including VAT <span class='text-danger'>*</span>",
+        amountFeedback: "This is a mandatory question. Must contain at least one number.",
+        nameLabel: "Full name / Company name <span class='text-danger'>*</span>",
+        nameFeedback: "This is a mandatory question.",
+        phoneLabel: "Phone number <span class='text-danger'>*</span>",
+        phoneFeedback: "This is a mandatory question.",
+        addressLabel: "Billing address <span class='text-danger'>*</span>",
+        addressFeedback: "This is a mandatory question.",
+        zipLabel: "ZIP Code <span class='text-danger'>*</span>",
+        zipFeedback: "This is a mandatory question.",
+        cityLabel: "City and province/state <span class='text-danger'>*</span>",
+        cityFeedback: "This is a mandatory question.",
+        countryLabel: "Country (e.g., IT) <span class='text-danger'>*</span>",
+        countryFeedback: "This is a mandatory question.",
+        pivaLabel: "VAT number <span class='text-danger'>*</span>",
+        pivaFeedback: "This is a mandatory question. VAT number must be valid.",
+        cfLabel: "Tax code <span class='text-danger'>*</span>",
+        cfFeedback: "This is a mandatory question.",
+        sdiPecLabel: "Codice Univoco SDI / PEC (only italian VAT number, otherwise insert XXXXXXX) <span class='text-danger'>*</span>",
+        sdiPecFeedback: "This is a mandatory question.",
+        submitButton: "Submit"
+      }
+    };
+
+    document.getElementById("languageSelector").addEventListener("change", (event) => {
+      const selectedLang = event.target.value;
+      const elementsToTranslate = [
+        { id: "title", key: "title" },
+        { id: "description", key: "description" },
+        { id: "mandatoryNote", key: "mandatoryNote" },
+        { id: "orderNumberLabel", key: "orderNumberLabel", isHTML: true },
+        { id: "orderNumberFeedback", key: "orderNumberFeedback" },
+        { id: "paymentMethodLabel", key: "paymentMethodLabel", isHTML: true },
+        { id: "paymentCard", key: "paymentCard" },
+        { id: "paymentPayPal", key: "paymentPayPal" },
+        { id: "paymentKlarna", key: "paymentKlarna" },
+        { id: "paymentBonifico", key: "paymentBonifico" },
+        { id: "paymentCOD", key: "paymentCOD" },
+        { id: "amountLabel", key: "amountLabel", isHTML: true },
+        { id: "amountFeedback", key: "amountFeedback" },
+        { id: "nameLabel", key: "nameLabel", isHTML: true },
+        { id: "nameFeedback", key: "nameFeedback" },
+        { id: "phoneLabel", key: "phoneLabel", isHTML: true },
+        { id: "phoneFeedback", key: "phoneFeedback" },
+        { id: "addressLabel", key: "addressLabel", isHTML: true },
+        { id: "addressFeedback", key: "addressFeedback" },
+        { id: "zipLabel", key: "zipLabel", isHTML: true },
+        { id: "zipFeedback", key: "zipFeedback" },
+        { id: "cityLabel", key: "cityLabel", isHTML: true },
+        { id: "cityFeedback", key: "cityFeedback" },
+        { id: "countryLabel", key: "countryLabel", isHTML: true },
+        { id: "countryFeedback", key: "countryFeedback" },
+        { id: "pivaLabel", key: "pivaLabel", isHTML: true },
+        { id: "pivaFeedback", key: "pivaFeedback" },
+        { id: "cfLabel", key: "cfLabel", isHTML: true },
+        { id: "cfFeedback", key: "cfFeedback" },
+        { id: "sdiPecLabel", key: "sdiPecLabel", isHTML: true },
+        { id: "sdiPecFeedback", key: "sdiPecFeedback" },
+        { id: "submitButton", key: "submitButton" }
+      ];
+
+      elementsToTranslate.forEach(({ id, key, isHTML }) => {
+        const element = document.getElementById(id);
+        if (element) {
+          if (isHTML) {
+            element.innerHTML = translations[selectedLang][key];
+          } else {
+            element.textContent = translations[selectedLang][key];
+          }
+        }
+      });
+    });
   </script>
 </body>
 
