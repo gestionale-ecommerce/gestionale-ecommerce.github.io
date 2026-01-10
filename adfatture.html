@@ -134,10 +134,11 @@
                   });
                 </script>
                 <div class="mb-3">
-                  <label for="piva" class="form-label" id="pivaLabel">Partita iva <span class="text-danger">*</span></label>
-                  <input type="text" class="form-control" id="piva" name="piva" placeholder="La tua risposta" required pattern=".*[0-9].*[0-9].*[0-9].*|^RO(\d{2,10})">
+                  <label for="piva" class="form-label" id="pivaLabel">Partita iva / VAT ID <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="piva" name="piva" placeholder="La tua risposta" required
+                    pattern="^(?:ATU[0-9]{8}|BE[0-9]{10}|BG[0-9]{9,10}|CY[0-9]{8}[A-Za-z]|CZ[0-9]{8,10}|DE[0-9]{9}|DK[0-9 ]{8,11}|EE[0-9]{9}|EL[0-9]{9}|ES[A-Za-z0-9]{9}|FI[0-9]{8}|FR[A-Za-z0-9]{2}[0-9]{9}|HR[0-9]{11}|HU[0-9]{8}|IE[A-Za-z0-9+*]{8,9}|IT[0-9]{11}|LT[0-9]{9,12}|LU[0-9]{8}|LV[0-9]{11}|MT[0-9]{8}|NL[A-Za-z0-9+*]{12}|PL[0-9]{10}|PT[0-9]{9}|RO[0-9]{2,10}|SE[0-9]{12}|SI[0-9]{8}|SK[0-9]{10}|XI(?:[0-9]{5}|[0-9]{9}|[0-9]{12}|[A-Za-z]{2}[0-9]{3})|U[0-9]{8}|[0-9]{10}|[0-9]{9,10}|[0-9]{8}[A-Za-z]|[0-9]{8,10}|[0-9]{9}|[0-9 ]{8,11}|[0-9]{8}|[A-Za-z0-9]{9}|[A-Za-z0-9]{2}[0-9]{9}|[0-9]{11}|[A-Za-z0-9+*]{8,9}|[0-9]{9,12}|[A-Za-z0-9+*]{12}|[0-9]{2,10}|[0-9]{12}|[0-9]{5}|[A-Za-z]{2}[0-9]{3})$">
                   <div class="invalid-feedback" id="pivaFeedback">
-                  Questa è una domanda obbligatoria. La partita iva deve essere valida.
+                  Questa è una domanda obbligatoria. La partita iva deve essere valida. <a href='https://ec.europa.eu/taxation_customs/vies/#/faq'>(i)</a>
                   </div>
                 </div>
                 <div class="mb-3">
@@ -486,8 +487,8 @@
         cityFeedback: "Questa è una domanda obbligatoria.",
         countryLabel: "Paese (es. IT) <span class='text-danger'>*</span>",
         countryFeedback: "Questa è una domanda obbligatoria.",
-        pivaLabel: "Partita iva <span class='text-danger'>*</span>",
-        pivaFeedback: "Questa è una domanda obbligatoria. La partita iva deve essere valida.",
+        pivaLabel: "Partita iva / VAT ID <span class='text-danger'>*</span>",
+        pivaFeedback: "Questa è una domanda obbligatoria. La partita iva deve essere valida. <a href='https://ec.europa.eu/taxation_customs/vies/#/faq'>(i)</a>",
         cfLabel: "Codice fiscale <span class='text-danger'>*</span>",
         cfFeedback: "Questa è una domanda obbligatoria.",
         sdiPecLabel: "Codice Univoco SDI / PEC (solo se la partita iva è italiana, altrimenti inserire XXXXXXX) <span class='text-danger'>*</span>",
@@ -520,8 +521,8 @@
         cityFeedback: "This is a mandatory question.",
         countryLabel: "Country (e.g., IT) <span class='text-danger'>*</span>",
         countryFeedback: "This is a mandatory question.",
-        pivaLabel: "VAT number <span class='text-danger'>*</span>",
-        pivaFeedback: "This is a mandatory question. VAT number must be valid.",
+        pivaLabel: "VAT number / VAT ID <span class='text-danger'>*</span>",
+        pivaFeedback: "This is a mandatory question. VAT number must be valid. <a href='https://ec.europa.eu/taxation_customs/vies/#/faq'>(i)</a>",
         cfLabel: "Tax code <span class='text-danger'>*</span>",
         cfFeedback: "This is a mandatory question.",
         sdiPecLabel: "Codice Univoco SDI / PEC (only italian VAT number, otherwise insert XXXXXXX) <span class='text-danger'>*</span>",
@@ -559,7 +560,7 @@
         { id: "countryLabel", key: "countryLabel", isHTML: true },
         { id: "countryFeedback", key: "countryFeedback" },
         { id: "pivaLabel", key: "pivaLabel", isHTML: true },
-        { id: "pivaFeedback", key: "pivaFeedback" },
+        { id: "pivaFeedback", key: "pivaFeedback", isHTML: true },
         { id: "cfLabel", key: "cfLabel", isHTML: true },
         { id: "cfFeedback", key: "cfFeedback" },
         { id: "sdiPecLabel", key: "sdiPecLabel", isHTML: true },
