@@ -46,15 +46,20 @@
           document.getElementById("result").innerHTML = "SERVER ERROR"
         } else {
           let text = "<ul>"
+          let urls = []
           for (let i in response) {
-            if (i == 0) {
-              continue
-            }
-            if (response[i].includes("http")) {
-              text += `<li><a href="${response[i]}" target="_blank" rel="noreferrer">${response[i]}</a></li>`
+            if (i > 1 && response[i].includes("http")) {
+              urls.push(response[i])
             }
           }
-          document.getElementById("result").innerHTML = text + "</ul>"
+          for (let j in urls) {
+            text += `<li><a href="${urls[j]}" target="_blank" rel="noreferrer">${urls[j]}</a></li>`
+          }
+          if (urls.length > 0) {
+            document.getElementById("result").innerHTML = text + "</ul>"
+          } else {
+            document.getElementById("result").innerHTML = "La richiesta è stata registrata con successo."
+          }
         }
       })
       .catch((error) => {
