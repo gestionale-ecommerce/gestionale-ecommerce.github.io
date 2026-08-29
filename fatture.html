@@ -1,11 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Richiesta fattura</title>
-  <!-- <link rel="shortcut icon" type="image/png" href="./assets/images/logos/favicon.png" /> -->
+  <title>Richiesta fattura ordine</title>
   <link rel="stylesheet" href="./assets/css/styles.min.css" />
 </head>
 
@@ -14,11 +13,182 @@
     <div class="container-fluid">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title fw-semibold mb-4">Richiedi fattura per:</h5>
-          <ul>
-            <li class="mb-2"><h5 class="card-title fw-semibold mb-4"><a href="adfatture.html">AmoreDesign</a></h5></li>
-            <li class="mb-2"><h5 class="card-title fw-semibold mb-4"><a href="nsfatture.html">NeibacShop</a></h5></li>
-          </ul>
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <h5 class="card-title fw-semibold mb-4" id="title">Richiesta fattura</h5>
+            <select id="languageSelector" class="form-select w-auto" aria-label="Lingua / Language">
+              <option value="it">Italiano</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+          <p data-i18n="description">
+            Compila i campi per richiedere la fattura del tuo ordine.
+          </p>
+          <p class="text-danger" data-i18n="mandatoryNote">
+            * Indica una domanda obbligatoria
+          </p>
+          <div class="card">
+            <div class="card-body">
+              <form id="invoiceForm" class="needs-validation" novalidate action="" method="POST">
+                <div class="mb-3" id="storeRow">
+                  <label for="store" class="form-label">
+                    <span data-i18n="storeLabel">Negozio dove hai effettuato l'ordine</span> <span class="text-danger">*</span>
+                  </label>
+                  <select class="form-select" id="store" required>
+                    <option value="" data-i18n="storePlaceholder">Seleziona un negozio</option>
+                  </select>
+                  <div class="invalid-feedback" data-feedback-for="store" data-i18n="storeFeedback">
+                    Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="order_number" class="form-label">
+                    <span data-i18n="orderNumberLabel">Numero ordine</span> <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="order_number" name="order_number" data-i18n-placeholder="answerPlaceholder" placeholder="La tua risposta" required inputmode="numeric" autocomplete="off">
+                  <div class="invalid-feedback" data-feedback-for="order_number">
+                    Questa è una domanda obbligatoria. Deve contenere almeno un numero.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="mb-2">
+                    <span class="form-label">
+                      <span data-i18n="paymentMethodLabel">Metodo di pagamento</span> <span class="text-danger">*</span>
+                    </span>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment" id="cartaOn" value="Carta" required>
+                    <label class="form-check-label" for="cartaOn" data-i18n="paymentCard">
+                      Carta di credito/debito/prepagata
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment" id="paypalOn" value="PayPal" required>
+                    <label class="form-check-label" for="paypalOn" data-i18n="paymentPayPal">
+                      PayPal
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment" id="klarnaOn" value="Klarna" required>
+                    <label class="form-check-label" for="klarnaOn" data-i18n="paymentKlarna">
+                      Pagamento a rate (Klarna)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment" id="bonificoOn" value="Bonifico" required>
+                    <label class="form-check-label" for="bonificoOn" data-i18n="paymentBonifico">
+                      Bonifico
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment" id="codOn" value="Pagamento alla consegna" required>
+                    <label class="form-check-label" for="codOn" data-i18n="paymentCOD">
+                      Pagamento alla consegna
+                    </label>
+                  </div>
+                  <div class="invalid-feedback" id="paymentFeedback" data-i18n="paymentFeedback">
+                    Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="amount" class="form-label">
+                    <span data-i18n="amountLabel">Importo ordine con iva compresa</span> <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="amount" name="amount" data-i18n-placeholder="answerPlaceholder" placeholder="La tua risposta" required inputmode="decimal" autocomplete="off">
+                  <div class="invalid-feedback" data-feedback-for="amount">
+                    Questa è una domanda obbligatoria. Deve contenere almeno un numero.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">
+                    <span data-i18n="nameLabel">Nome e cognome / Ragione Sociale</span> <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="name" name="name" data-i18n-placeholder="answerPlaceholder" placeholder="La tua risposta" required autocomplete="organization">
+                  <div class="invalid-feedback" data-feedback-for="name">
+                    Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="phone" class="form-label">
+                    <span data-i18n="phoneLabel">Numero di telefono</span> <span class="text-danger">*</span>
+                  </label>
+                  <input type="tel" class="form-control" id="phone" name="phone" data-i18n-placeholder="answerPlaceholder" placeholder="La tua risposta" required autocomplete="tel">
+                  <div class="invalid-feedback" data-feedback-for="phone">
+                    Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="country" class="form-label">
+                    <span data-i18n="countryLabel">Paese di fatturazione</span> <span class="text-danger">*</span>
+                  </label>
+                  <select class="form-select" id="country" name="country" required autocomplete="country">
+                    <option value="" data-i18n="countryPlaceholder">Seleziona un paese</option>
+                  </select>
+                  <div class="invalid-feedback" data-feedback-for="country">
+                    Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="address" class="form-label">
+                    <span data-i18n="addressLabel">Indirizzo di fatturazione</span> <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="address" name="address" data-i18n-placeholder="answerPlaceholder" placeholder="La tua risposta" required autocomplete="street-address" maxlength="60">
+                  <div class="invalid-feedback" data-feedback-for="address">
+                    Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="cap" class="form-label">
+                    <span data-i18n="zipLabel">CAP</span> <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="cap" name="cap" data-i18n-placeholder="answerPlaceholder" placeholder="La tua risposta" required autocomplete="postal-code">
+                  <div class="invalid-feedback" data-feedback-for="cap">
+                    Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="city" class="form-label">
+                    <span data-i18n="cityLabel">Comune e provincia</span> <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="city" name="city" data-i18n-placeholder="answerPlaceholder" placeholder="La tua risposta" required autocomplete="address-level2">
+                  <div class="invalid-feedback" data-feedback-for="city">
+                    Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="piva" class="form-label">
+                    <span data-i18n="pivaLabel">Partita iva / VAT ID</span> <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="piva" name="piva" data-i18n-placeholder="answerPlaceholder" placeholder="La tua risposta" required autocomplete="off" spellcheck="false">
+                  <div class="form-text" data-i18n="pivaHelp">
+                    Inserisci la partita iva senza il prefisso del paese (viene aggiunto in automatico).
+                  </div>
+                  <div class="invalid-feedback">
+                    <span data-feedback-for="piva">Questa è una domanda obbligatoria.</span>
+                    <a href="https://ec.europa.eu/taxation_customs/vies/#/faq" target="_blank" rel="noopener">(i)</a>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="cf" class="form-label">
+                    <span data-i18n="cfLabel">Codice fiscale</span> <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="cf" name="cf" data-i18n-placeholder="answerPlaceholder" placeholder="La tua risposta" required autocomplete="off" spellcheck="false">
+                  <div class="invalid-feedback" data-feedback-for="cf">
+                    Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="sdi_pec" class="form-label">
+                    <span data-i18n="sdiPecLabel">Codice Univoco SDI / PEC (solo se la partita iva è italiana, altrimenti inserire XXXXXXX)</span> <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="sdi_pec" name="sdi_pec" data-i18n-placeholder="answerPlaceholder" placeholder="La tua risposta" required autocomplete="off" spellcheck="false">
+                  <div class="invalid-feedback" data-feedback-for="sdi_pec">
+                    Questa è una domanda obbligatoria.
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitButton" data-i18n="submitButton">Invia</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -28,6 +198,800 @@
   <script src="./assets/js/sidebarmenu.js"></script>
   <script src="./assets/js/app.min.js"></script>
   <script src="./assets/libs/simplebar/dist/simplebar.js"></script>
+  <script>
+    const countryListAlpha2 = {
+      "AF": "Afghanistan",
+      "AL": "Albania",
+      "DZ": "Algeria",
+      "AS": "American Samoa",
+      "AD": "Andorra",
+      "AO": "Angola",
+      "AI": "Anguilla",
+      "AQ": "Antarctica",
+      "AG": "Antigua and Barbuda",
+      "AR": "Argentina",
+      "AM": "Armenia",
+      "AW": "Aruba",
+      "AU": "Australia",
+      "AT": "Austria",
+      "AZ": "Azerbaijan",
+      "BS": "Bahamas (the)",
+      "BH": "Bahrain",
+      "BD": "Bangladesh",
+      "BB": "Barbados",
+      "BY": "Belarus",
+      "BE": "Belgium",
+      "BZ": "Belize",
+      "BJ": "Benin",
+      "BM": "Bermuda",
+      "BT": "Bhutan",
+      "BO": "Bolivia (Plurinational State of)",
+      "BQ": "Bonaire, Sint Eustatius and Saba",
+      "BA": "Bosnia and Herzegovina",
+      "BW": "Botswana",
+      "BV": "Bouvet Island",
+      "BR": "Brazil",
+      "IO": "British Indian Ocean Territory (the)",
+      "BN": "Brunei Darussalam",
+      "BG": "Bulgaria",
+      "BF": "Burkina Faso",
+      "BI": "Burundi",
+      "CV": "Cabo Verde",
+      "KH": "Cambodia",
+      "CM": "Cameroon",
+      "CA": "Canada",
+      "KY": "Cayman Islands (the)",
+      "CF": "Central African Republic (the)",
+      "TD": "Chad",
+      "CL": "Chile",
+      "CN": "China",
+      "CX": "Christmas Island",
+      "CC": "Cocos (Keeling) Islands (the)",
+      "CO": "Colombia",
+      "KM": "Comoros (the)",
+      "CD": "Congo (the Democratic Republic of the)",
+      "CG": "Congo (the)",
+      "CK": "Cook Islands (the)",
+      "CR": "Costa Rica",
+      "HR": "Croatia",
+      "CU": "Cuba",
+      "CW": "Curaçao",
+      "CY": "Cyprus",
+      "CZ": "Czechia",
+      "CI": "Côte d'Ivoire",
+      "DK": "Denmark",
+      "DJ": "Djibouti",
+      "DM": "Dominica",
+      "DO": "Dominican Republic (the)",
+      "EC": "Ecuador",
+      "EG": "Egypt",
+      "SV": "El Salvador",
+      "GQ": "Equatorial Guinea",
+      "ER": "Eritrea",
+      "EE": "Estonia",
+      "SZ": "Eswatini",
+      "ET": "Ethiopia",
+      "FK": "Falkland Islands (the) [Malvinas]",
+      "FO": "Faroe Islands (the)",
+      "FJ": "Fiji",
+      "FI": "Finland",
+      "FR": "France",
+      "GF": "French Guiana",
+      "PF": "French Polynesia",
+      "TF": "French Southern Territories (the)",
+      "GA": "Gabon",
+      "GM": "Gambia (the)",
+      "GE": "Georgia",
+      "DE": "Germany",
+      "GH": "Ghana",
+      "GI": "Gibraltar",
+      "GR": "Greece",
+      "GL": "Greenland",
+      "GD": "Grenada",
+      "GP": "Guadeloupe",
+      "GU": "Guam",
+      "GT": "Guatemala",
+      "GG": "Guernsey",
+      "GN": "Guinea",
+      "GW": "Guinea-Bissau",
+      "GY": "Guyana",
+      "HT": "Haiti",
+      "HM": "Heard Island and McDonald Islands",
+      "VA": "Holy See (the)",
+      "HN": "Honduras",
+      "HK": "Hong Kong",
+      "HU": "Hungary",
+      "IS": "Iceland",
+      "IN": "India",
+      "ID": "Indonesia",
+      "IR": "Iran (Islamic Republic of)",
+      "IQ": "Iraq",
+      "IE": "Ireland",
+      "IM": "Isle of Man",
+      "IL": "Israel",
+      "IT": "Italy",
+      "JM": "Jamaica",
+      "JP": "Japan",
+      "JE": "Jersey",
+      "JO": "Jordan",
+      "KZ": "Kazakhstan",
+      "KE": "Kenya",
+      "KI": "Kiribati",
+      "KP": "Korea (the Democratic People's Republic of)",
+      "KR": "Korea (the Republic of)",
+      "KW": "Kuwait",
+      "KG": "Kyrgyzstan",
+      "LA": "Lao People's Democratic Republic (the)",
+      "LV": "Latvia",
+      "LB": "Lebanon",
+      "LS": "Lesotho",
+      "LR": "Liberia",
+      "LY": "Libya",
+      "LI": "Liechtenstein",
+      "LT": "Lithuania",
+      "LU": "Luxembourg",
+      "MO": "Macao",
+      "MG": "Madagascar",
+      "MW": "Malawi",
+      "MY": "Malaysia",
+      "MV": "Maldives",
+      "ML": "Mali",
+      "MT": "Malta",
+      "MH": "Marshall Islands (the)",
+      "MQ": "Martinique",
+      "MR": "Mauritania",
+      "MU": "Mauritius",
+      "YT": "Mayotte",
+      "MX": "Mexico",
+      "FM": "Micronesia (Federated States of)",
+      "MD": "Moldova (the Republic of)",
+      "MC": "Monaco",
+      "MN": "Mongolia",
+      "ME": "Montenegro",
+      "MS": "Montserrat",
+      "MA": "Morocco",
+      "MZ": "Mozambique",
+      "MM": "Myanmar",
+      "NA": "Namibia",
+      "NR": "Nauru",
+      "NP": "Nepal",
+      "NL": "Netherlands (the)",
+      "NC": "New Caledonia",
+      "NZ": "New Zealand",
+      "NI": "Nicaragua",
+      "NE": "Niger (the)",
+      "NG": "Nigeria",
+      "NU": "Niue",
+      "NF": "Norfolk Island",
+      "MP": "Northern Mariana Islands (the)",
+      "NO": "Norway",
+      "OM": "Oman",
+      "PK": "Pakistan",
+      "PW": "Palau",
+      "PS": "Palestine, State of",
+      "PA": "Panama",
+      "PG": "Papua New Guinea",
+      "PY": "Paraguay",
+      "PE": "Peru",
+      "PH": "Philippines (the)",
+      "PN": "Pitcairn",
+      "PL": "Poland",
+      "PT": "Portugal",
+      "PR": "Puerto Rico",
+      "QA": "Qatar",
+      "MK": "Republic of North Macedonia",
+      "RO": "Romania",
+      "RU": "Russian Federation (the)",
+      "RW": "Rwanda",
+      "RE": "Réunion",
+      "BL": "Saint Barthélemy",
+      "SH": "Saint Helena, Ascension and Tristan da Cunha",
+      "KN": "Saint Kitts and Nevis",
+      "LC": "Saint Lucia",
+      "MF": "Saint Martin (French part)",
+      "PM": "Saint Pierre and Miquelon",
+      "VC": "Saint Vincent and the Grenadines",
+      "WS": "Samoa",
+      "SM": "San Marino",
+      "ST": "Sao Tome and Principe",
+      "SA": "Saudi Arabia",
+      "SN": "Senegal",
+      "RS": "Serbia",
+      "SC": "Seychelles",
+      "SL": "Sierra Leone",
+      "SG": "Singapore",
+      "SX": "Sint Maarten (Dutch part)",
+      "SK": "Slovakia",
+      "SI": "Slovenia",
+      "SB": "Solomon Islands",
+      "SO": "Somalia",
+      "ZA": "South Africa",
+      "GS": "South Georgia and the South Sandwich Islands",
+      "SS": "South Sudan",
+      "ES": "Spain",
+      "LK": "Sri Lanka",
+      "SD": "Sudan (the)",
+      "SR": "Suriname",
+      "SJ": "Svalbard and Jan Mayen",
+      "SE": "Sweden",
+      "CH": "Switzerland",
+      "SY": "Syrian Arab Republic",
+      "TW": "Taiwan",
+      "TJ": "Tajikistan",
+      "TZ": "Tanzania, United Republic of",
+      "TH": "Thailand",
+      "TL": "Timor-Leste",
+      "TG": "Togo",
+      "TK": "Tokelau",
+      "TO": "Tonga",
+      "TT": "Trinidad and Tobago",
+      "TN": "Tunisia",
+      "TR": "Turkey",
+      "TM": "Turkmenistan",
+      "TC": "Turks and Caicos Islands (the)",
+      "TV": "Tuvalu",
+      "UG": "Uganda",
+      "UA": "Ukraine",
+      "AE": "United Arab Emirates (the)",
+      "GB": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "UM": "United States Minor Outlying Islands (the)",
+      "US": "United States of America (the)",
+      "UY": "Uruguay",
+      "UZ": "Uzbekistan",
+      "VU": "Vanuatu",
+      "VE": "Venezuela (Bolivarian Republic of)",
+      "VN": "Viet Nam",
+      "VG": "Virgin Islands (British)",
+      "VI": "Virgin Islands (U.S.)",
+      "WF": "Wallis and Futuna",
+      "EH": "Western Sahara",
+      "YE": "Yemen",
+      "ZM": "Zambia",
+      "ZW": "Zimbabwe",
+      "AX": "Åland Islands"
+    }
+
+    // ---------------------------------------------------------------------------
+    // Negozi: la pagina e' unica, il negozio arriva da ?store=... oppure dal menu
+    // a tendina. Per aggiungere un negozio basta una riga qui.
+    // ---------------------------------------------------------------------------
+    const ENDPOINT = "https://gestionale.novacommercesrl.com/api/fatture/"
+    const STORES = {
+      adeuorders: { label: "AmoreDesign EU", aliases: ["ad", "amore", "amoredesign"] },
+      nsorders: { label: "NeibacShop", aliases: ["ns", "neibac", "neibacshop"] }
+    }
+
+    function resolveStore(value) {
+      const v = (value || "").trim().toLowerCase()
+      if (!v) return ""
+      for (const key in STORES) {
+        if (v === key.toLowerCase() || STORES[key].aliases.includes(v)) return key
+      }
+      return ""
+    }
+
+    // ---------------------------------------------------------------------------
+    // Traduzioni
+    // ---------------------------------------------------------------------------
+    const translations = {
+      it: {
+        title: "Richiesta fattura",
+        description: "Compila i campi per richiedere la fattura del tuo ordine.",
+        mandatoryNote: "* Indica una domanda obbligatoria",
+        answerPlaceholder: "La tua risposta",
+        storeLabel: "Negozio dove hai effettuato l'ordine",
+        storePlaceholder: "Seleziona un negozio",
+        storeFeedback: "Questa è una domanda obbligatoria.",
+        orderNumberLabel: "Numero ordine",
+        paymentMethodLabel: "Metodo di pagamento",
+        paymentCard: "Carta di credito/debito/prepagata",
+        paymentPayPal: "PayPal",
+        paymentKlarna: "Pagamento a rate (Klarna)",
+        paymentBonifico: "Bonifico",
+        paymentCOD: "Pagamento alla consegna",
+        paymentFeedback: "Questa è una domanda obbligatoria.",
+        amountLabel: "Importo ordine con iva compresa",
+        nameLabel: "Nome e cognome / Ragione Sociale",
+        phoneLabel: "Numero di telefono",
+        countryLabel: "Paese di fatturazione",
+        countryPlaceholder: "Seleziona un paese",
+        addressLabel: "Indirizzo di fatturazione",
+        zipLabel: "CAP",
+        cityLabel: "Comune e provincia",
+        pivaLabel: "Partita iva / VAT ID",
+        pivaHelp: "Inserisci la partita iva senza il prefisso del paese (viene aggiunto in automatico).",
+        cfLabel: "Codice fiscale",
+        sdiPecLabel: "Codice Univoco SDI / PEC (solo se la partita iva è italiana, altrimenti inserire XXXXXXX)",
+        submitButton: "Invia",
+        // messaggi di errore
+        required: "Questa è una domanda obbligatoria.",
+        orderNumberInvalid: "Inserisci il numero dell'ordine (deve contenere almeno una cifra).",
+        amountInvalid: "Inserisci l'importo totale dell'ordine, ad esempio 129,90.",
+        nameInvalid: "Inserisci il nome completo o la ragione sociale.",
+        phoneInvalid: "Inserisci un numero di telefono valido (almeno 6 cifre).",
+        addressInvalid: "Inserisci indirizzo e numero civico.",
+        cityInvalid: "Inserisci il comune e la provincia, ad esempio Milano (MI).",
+        capInvalid: "Inserisci un codice postale valido.",
+        capInvalidIt: "Il CAP italiano deve essere di 5 cifre.",
+        pivaInvalid: "La partita iva non è valida per il paese selezionato.",
+        pivaCountryFirst: "Seleziona prima il paese di fatturazione.",
+        cfInvalid: "Il codice fiscale non è valido: 16 caratteri per le persone fisiche, 11 cifre per le aziende.",
+        cfInvalidForeign: "Inserisci il codice fiscale o identificativo fiscale (almeno 4 caratteri).",
+        sdiInvalidIt: "Inserisci 7 caratteri di Codice Univoco SDI oppure un indirizzo PEC. Se non li hai, inserisci 0000000.",
+        sdiInvalid: "Per le partite iva estere inserisci XXXXXXX."
+      },
+      en: {
+        title: "Invoice request",
+        description: "Fill in the fields to request the invoice for your order.",
+        mandatoryNote: "* Indicates a mandatory question",
+        answerPlaceholder: "Your answer",
+        storeLabel: "Store where you placed the order",
+        storePlaceholder: "Select a store",
+        storeFeedback: "This is a mandatory question.",
+        orderNumberLabel: "Order number",
+        paymentMethodLabel: "Payment method",
+        paymentCard: "Credit/Debit/Prepaid card",
+        paymentPayPal: "PayPal",
+        paymentKlarna: "Installment payment (Klarna)",
+        paymentBonifico: "Bank transfer",
+        paymentCOD: "Cash on delivery",
+        paymentFeedback: "This is a mandatory question.",
+        amountLabel: "Order amount including VAT",
+        nameLabel: "Full name / Company name",
+        phoneLabel: "Phone number",
+        countryLabel: "Billing country",
+        countryPlaceholder: "Select a country",
+        addressLabel: "Billing address",
+        zipLabel: "ZIP code",
+        cityLabel: "City and province/state",
+        pivaLabel: "VAT number / VAT ID",
+        pivaHelp: "Enter the VAT number without the country prefix (it is added automatically).",
+        cfLabel: "Tax code",
+        sdiPecLabel: "Codice Univoco SDI / PEC (only italian VAT number, otherwise insert XXXXXXX)",
+        submitButton: "Submit",
+        // error messages
+        required: "This is a mandatory question.",
+        orderNumberInvalid: "Enter your order number (it must contain at least one digit).",
+        amountInvalid: "Enter the order total, for example 129.90.",
+        nameInvalid: "Enter your full name or company name.",
+        phoneInvalid: "Enter a valid phone number (at least 6 digits).",
+        addressInvalid: "Enter street name and number.",
+        cityInvalid: "Enter city and province/state.",
+        capInvalid: "Enter a valid postal code.",
+        capInvalidIt: "The italian ZIP code must be 5 digits.",
+        pivaInvalid: "The VAT number is not valid for the selected country.",
+        pivaCountryFirst: "Please select the billing country first.",
+        cfInvalid: "The italian tax code is not valid: 16 characters for individuals, 11 digits for companies.",
+        cfInvalidForeign: "Enter your tax code or tax identification number (at least 4 characters).",
+        sdiInvalidIt: "Enter the 7 characters of the Codice Univoco SDI or a PEC address. If you have neither, enter 0000000.",
+        sdiInvalid: "For non-italian VAT numbers enter XXXXXXX."
+      }
+    }
+
+    let lang = "it"
+    const t = key => (translations[lang] && translations[lang][key]) || translations.it[key] || ""
+
+    // ---------------------------------------------------------------------------
+    // Normalizzazione del testo (maiuscole, spazi doppi, ecc.)
+    // ---------------------------------------------------------------------------
+    const ACRONYMS = new Set([
+      "SRL", "SRLS", "SPA", "SNC", "SAS", "SS", "SCARL", "SCRL", "SC", "SAPA", "CF", "PI", "PIVA",
+      "LTD", "LLC", "LLP", "INC", "PLC", "CORP", "CO", "GMBH", "UG", "AG", "KG", "OHG", "MBH",
+      "BV", "NV", "AB", "AS", "APS", "OY", "SA", "SL", "SLU", "SARL", "SAS", "EURL", "SASU",
+      "DOO", "OOD", "EOOD", "KFT", "ZOO", "AD", "EU", "IT", "USA", "UK", "BB"
+    ])
+    const NOBLE = new Set(["di", "de", "del", "della", "dei", "degli", "dal", "dalla", "da", "e", "van", "von", "der", "la", "le", "lo", "il", "l'", "d'", "dell'", "sull'", "su", "in", "a", "al", "allo", "alla"])
+
+    const collapse = s => (s || "").replace(/\s+/g, " ").trim()
+    const upperCompact = s => collapse(s).toUpperCase().replace(/\s+/g, "")
+
+    function capitalizeToken(token, isFirst, prevSeparator) {
+      const bare = token.replace(/[^0-9A-Za-zÀ-ÿ]/g, "")
+      if (!bare) return token
+      if (ACRONYMS.has(bare.toUpperCase())) return token.toUpperCase()
+      if (/\d/.test(bare)) return token.toUpperCase()
+      // sigle attaccate da punto o barra: 12/a -> 12/A, s.r.l. -> S.R.L.
+      if (bare.length <= 2 && /^[.\/]+$/.test(prevSeparator || "")) return token.toUpperCase()
+      if (!isFirst && NOBLE.has(token.toLowerCase())) return token.toLowerCase()
+      return token.charAt(0).toUpperCase() + token.slice(1)
+    }
+
+    // Se l'utente ha gia' scritto in maiuscolo/minuscolo misto non tocchiamo nulla:
+    // sistemiamo solo chi scrive TUTTO MAIUSCOLO o tutto minuscolo.
+    function smartCase(value) {
+      const s = collapse(value)
+      if (!s) return ""
+      if (/[a-zà-öø-ÿ]/.test(s) && /[A-ZÀ-ÖØ-Þ]/.test(s)) return s
+      let first = true
+      let separator = ""
+      return s.toLowerCase().split(/([ \-'’.\/,]+)/).map(token => {
+        if (/^[ \-'’.\/,]+$/.test(token)) {
+          separator = token
+          return token
+        }
+        const out = capitalizeToken(token, first, separator)
+        first = false
+        return out
+      }).join("")
+    }
+
+    // Comune e provincia: la sigla di provincia resta maiuscola, es. Milano (MI)
+    function smartCaseCity(value) {
+      return smartCase(value)
+        .replace(/\(([A-Za-zÀ-ÿ]{2})\)/g, (m, p) => "(" + p.toUpperCase() + ")")
+        .replace(/(,\s*|\s+)([A-Za-z]{2})$/, (m, sep, p) => sep + p.toUpperCase())
+    }
+
+    function normalizeAmount(value) {
+      return collapse(value).replace(/[\s€$£]/g, "")
+    }
+
+    function normalizePhone(value) {
+      return collapse(value).replace(/[^\d+\s().\-\/]/g, "")
+    }
+
+    // ---------------------------------------------------------------------------
+    // Partita iva / VAT ID
+    // ---------------------------------------------------------------------------
+    // Formati nazionali (senza prefisso paese). La validazione definitiva resta
+    // lato server (python-stdnum + VIES): qui intercettiamo gli errori di battitura.
+    const VAT_RULES = {
+      AT: /^U\d{8}$/,
+      BE: /^[01]\d{9}$/,
+      BG: /^\d{9,10}$/,
+      CY: /^\d{8}[A-Z]$/,
+      CZ: /^\d{8,10}$/,
+      DE: /^[1-9]\d{8}$/,
+      DK: /^\d{8}$/,
+      EE: /^\d{9}$/,
+      EL: /^\d{9}$/,
+      ES: /^[A-Z0-9]\d{7}[A-Z0-9]$/,
+      FI: /^\d{8}$/,
+      FR: /^[A-Z0-9]{2}\d{9}$/,
+      GB: /^(\d{9}|\d{12}|GD\d{3}|HA\d{3})$/,
+      HR: /^\d{11}$/,
+      HU: /^\d{8}$/,
+      IE: /^(\d{7}[A-W]|[7-9][A-Z*+]\d{5}[A-W]|\d{7}[A-W][A-IW])$/,
+      IT: /^\d{11}$/,
+      LT: /^(\d{9}|\d{12})$/,
+      LU: /^\d{8}$/,
+      LV: /^\d{11}$/,
+      MT: /^\d{8}$/,
+      NL: /^\d{9}B\d{2}$/,
+      PL: /^\d{10}$/,
+      PT: /^\d{9}$/,
+      RO: /^[1-9]\d{1,9}$/,
+      SE: /^\d{12}$/,
+      SI: /^[1-9]\d{7}$/,
+      SK: /^\d{10}$/
+    }
+    const GENERIC_VAT = /^[A-Z0-9][A-Z0-9.\-\/]{3,19}$/
+
+    // Prefisso usato nelle partite iva europee (la Grecia usa EL, non GR)
+    const vatPrefix = country => (country === "GR" ? "EL" : country)
+
+    function normalizePiva(value, country) {
+      let v = (value || "").toUpperCase().replace(/[^A-Z0-9+*]/g, "")
+      const prefix = vatPrefix(country)
+      if (prefix && v.startsWith(prefix)) v = v.slice(prefix.length)
+      return v
+    }
+
+    // Cifra di controllo delle partite iva italiane (anche per il CF numerico)
+    function itVatChecksum(n) {
+      let sum = 0
+      for (let i = 0; i < 10; i++) {
+        let d = +n[i]
+        if (i % 2) {
+          d *= 2
+          if (d > 9) d -= 9
+        }
+        sum += d
+      }
+      return (10 - sum % 10) % 10 === +n[10]
+    }
+
+    function pivaError(value, country) {
+      if (!country) return "pivaCountryFirst"
+      const v = normalizePiva(value, country)
+      if (!v) return "required"
+      if (/^0+$/.test(v) || /^X+$/.test(v)) return "pivaInvalid"
+      const rule = VAT_RULES[vatPrefix(country)]
+      if (rule) {
+        if (!rule.test(v)) return "pivaInvalid"
+        if (country === "IT" && !itVatChecksum(v)) return "pivaInvalid"
+        return ""
+      }
+      return GENERIC_VAT.test(v) ? "" : "pivaInvalid"
+    }
+
+    // ---------------------------------------------------------------------------
+    // Codice fiscale italiano
+    // ---------------------------------------------------------------------------
+    const CF_ODD = {
+      "0": 1, "1": 0, "2": 5, "3": 7, "4": 9, "5": 13, "6": 15, "7": 17, "8": 19, "9": 21,
+      A: 1, B: 0, C: 5, D: 7, E: 9, F: 13, G: 15, H: 17, I: 19, J: 21, K: 2, L: 4, M: 18,
+      N: 20, O: 11, P: 3, Q: 6, R: 8, S: 12, T: 14, U: 16, V: 10, W: 22, X: 25, Y: 24, Z: 23
+    }
+    // Sostituzioni di omocodia: nelle posizioni numeriche 0-9 diventano L,M,N,P,Q,R,S,T,U,V
+    const CF_OMOCODIA = { L: "0", M: "1", N: "2", P: "3", Q: "4", R: "5", S: "6", T: "7", U: "8", V: "9" }
+    const CF_NUMERIC_POSITIONS = [6, 7, 9, 10, 12, 13, 14]
+
+    function isValidCf(cf) {
+      if (/^\d{11}$/.test(cf)) return itVatChecksum(cf)  // codice fiscale numerico (aziende)
+      if (!/^[A-Z0-9]{16}$/.test(cf)) return false
+
+      const chars = cf.split("")
+      CF_NUMERIC_POSITIONS.forEach(p => {
+        if (CF_OMOCODIA[chars[p]] !== undefined) chars[p] = CF_OMOCODIA[chars[p]]
+      })
+      if (!/^[A-Z]{6}\d{2}[ABCDEHLMPRST]\d{2}[A-Z]\d{3}[A-Z]$/.test(chars.join(""))) return false
+
+      let sum = 0
+      for (let i = 0; i < 15; i++) {
+        const ch = cf[i]
+        sum += (i % 2 === 0) ? CF_ODD[ch] : (/\d/.test(ch) ? +ch : ch.charCodeAt(0) - 65)
+      }
+      return String.fromCharCode(65 + sum % 26) === cf[15]
+    }
+
+    function cfError(value, country) {
+      const v = upperCompact(value)
+      if (!v) return "required"
+      if (country === "IT") return isValidCf(v) ? "" : "cfInvalid"
+      return /^[A-Z0-9.\-\/]{4,}$/.test(v) ? "" : "cfInvalidForeign"
+    }
+
+    // ---------------------------------------------------------------------------
+    // SDI / PEC e CAP
+    // ---------------------------------------------------------------------------
+    const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)
+
+    function normalizeSdi(value) {
+      const v = collapse(value).replace(/\s+/g, "")
+      return v.includes("@") ? v.toLowerCase() : v.toUpperCase()
+    }
+
+    function sdiError(value, country) {
+      const v = normalizeSdi(value)
+      if (!v) return "required"
+      if (country === "IT") return (/^[A-Z0-9]{7}$/.test(v) || isEmail(v)) ? "" : "sdiInvalidIt"
+      return (/^[A-Z0-9]{2,}$/.test(v) || isEmail(v)) ? "" : "sdiInvalid"
+    }
+
+    function normalizeCap(value, country) {
+      const v = collapse(value).toUpperCase()
+      return country === "IT" ? v.replace(/\D/g, "") : v.replace(/\s+/g, " ")
+    }
+
+    function capError(value, country) {
+      const v = normalizeCap(value, country)
+      if (!v) return "required"
+      if (country === "IT") return /^\d{5}$/.test(v) ? "" : "capInvalidIt"
+      return /^[A-Z0-9][A-Z0-9 \-]{1,11}$/.test(v) ? "" : "capInvalid"
+    }
+
+    // ---------------------------------------------------------------------------
+    // Regole per campo: normalizzazione (on blur) + validazione
+    // ---------------------------------------------------------------------------
+    const form = document.getElementById("invoiceForm")
+    const storeSelect = document.getElementById("store")
+    const storeRow = document.getElementById("storeRow")
+    const countrySelect = document.getElementById("country")
+    const languageSelector = document.getElementById("languageSelector")
+    const submitButton = document.getElementById("submitButton")
+    const paymentFeedback = document.getElementById("paymentFeedback")
+    const titleElement = document.getElementById("title")
+
+    const currentCountry = () => countrySelect.value
+
+    const FIELDS = {
+      order_number: {
+        normalize: v => collapse(v),
+        validate: v => (/\d/.test(v) ? "" : "orderNumberInvalid")
+      },
+      amount: {
+        normalize: normalizeAmount,
+        validate: v => (/\d/.test(v) && /^-?[€$£]?\d+([.,]\d+)*[€$£]?$/.test(v) ? "" : "amountInvalid")
+      },
+      name: {
+        normalize: smartCase,
+        validate: v => (v.length >= 2 ? "" : "nameInvalid")
+      },
+      phone: {
+        normalize: normalizePhone,
+        validate: v => ((v.replace(/\D/g, "").length >= 6) ? "" : "phoneInvalid")
+      },
+      address: {
+        normalize: smartCase,
+        validate: v => (v.length >= 3 && /[A-Za-zÀ-ÿ]/.test(v) ? "" : "addressInvalid")
+      },
+      cap: {
+        normalize: v => normalizeCap(v, currentCountry()),
+        validate: v => capError(v, currentCountry())
+      },
+      city: {
+        normalize: smartCaseCity,
+        validate: v => (v.length >= 2 && /[A-Za-zÀ-ÿ]/.test(v) ? "" : "cityInvalid")
+      },
+      piva: {
+        normalize: v => normalizePiva(v, currentCountry()),
+        validate: v => pivaError(v, currentCountry())
+      },
+      cf: {
+        normalize: upperCompact,
+        validate: v => cfError(v, currentCountry())
+      },
+      sdi_pec: {
+        normalize: normalizeSdi,
+        validate: v => sdiError(v, currentCountry())
+      }
+    }
+
+    function setFeedback(id, key) {
+      const fb = document.querySelector('[data-feedback-for="' + id + '"]')
+      if (fb) fb.textContent = t(key)
+    }
+
+    function validateField(id) {
+      const el = document.getElementById(id)
+      if (!el) return true
+      const value = el.value
+      let key = ""
+      if (!value.trim()) {
+        key = "required"
+      } else if (FIELDS[id]) {
+        key = FIELDS[id].validate(value) || ""
+      }
+      el.setCustomValidity(key ? t(key) : "")
+      setFeedback(id, key || "required")
+      return !key
+    }
+
+    function normalizeField(id) {
+      const el = document.getElementById(id)
+      if (!el || !FIELDS[id] || !el.value.trim()) return
+      const normalized = FIELDS[id].normalize(el.value)
+      if (normalized !== el.value) el.value = normalized
+    }
+
+    function validateAll() {
+      let ok = true
+      Object.keys(FIELDS).forEach(id => {
+        normalizeField(id)
+        if (!validateField(id)) ok = false
+      })
+      if (!validateField("country")) ok = false
+      if (!validateField("store")) ok = false
+      const paymentChecked = !!form.querySelector('input[name="payment"]:checked')
+      paymentFeedback.classList.toggle("d-block", !paymentChecked)
+      return ok && paymentChecked
+    }
+
+    Object.keys(FIELDS).forEach(id => {
+      const el = document.getElementById(id)
+      if (!el) return
+      el.addEventListener("blur", () => {
+        normalizeField(id)
+        validateField(id)
+      })
+      el.addEventListener("input", () => {
+        if (form.classList.contains("was-validated")) validateField(id)
+      })
+    })
+
+    form.querySelectorAll('input[name="payment"]').forEach(radio => {
+      radio.addEventListener("change", () => paymentFeedback.classList.remove("d-block"))
+    })
+
+    // ---------------------------------------------------------------------------
+    // Paese: da esso dipendono CAP, partita iva, codice fiscale e SDI
+    // ---------------------------------------------------------------------------
+    let countryOptions = '<option value="" data-i18n="countryPlaceholder">' + t("countryPlaceholder") + "</option>"
+    for (const code in countryListAlpha2) {
+      countryOptions += '<option value="' + code + '">' + countryListAlpha2[code] + " (" + code + ")</option>"
+    }
+    countrySelect.innerHTML = countryOptions
+
+    countrySelect.addEventListener("change", () => {
+      const country = currentCountry()
+      const sdiField = document.getElementById("sdi_pec")
+      if (country && country !== "IT" && (!sdiField.value.trim() || /^X+$/i.test(sdiField.value.trim()))) {
+        sdiField.value = "XXXXXXX"
+      } else if (country === "IT" && /^X+$/i.test(sdiField.value.trim())) {
+        sdiField.value = ""
+      }
+      // i campi che dipendono dal paese vanno ricontrollati
+      ;["cap", "piva", "cf", "sdi_pec"].forEach(id => {
+        normalizeField(id)
+        if (document.getElementById(id).value.trim() || form.classList.contains("was-validated")) validateField(id)
+      })
+      validateField("country")
+    })
+
+    // ---------------------------------------------------------------------------
+    // Negozio: da URL (?store=ad) oppure dal menu a tendina
+    // ---------------------------------------------------------------------------
+    let storeOptions = '<option value="" data-i18n="storePlaceholder">' + t("storePlaceholder") + "</option>"
+    for (const key in STORES) {
+      storeOptions += '<option value="' + key + '">' + STORES[key].label + "</option>"
+    }
+    storeSelect.innerHTML = storeOptions
+
+    function applyStore(collection) {
+      storeSelect.value = collection || ""
+      form.action = collection ? ENDPOINT + collection : ""
+      updateTitle()
+    }
+
+    function updateTitle() {
+      const store = STORES[storeSelect.value]
+      const text = t("title") + (store ? " " + store.label : "")
+      titleElement.textContent = text
+      document.title = text
+    }
+
+    storeSelect.addEventListener("change", () => {
+      applyStore(storeSelect.value)
+      validateField("store")
+    })
+
+    // ---------------------------------------------------------------------------
+    // Lingua
+    // ---------------------------------------------------------------------------
+    function applyLanguage(selected) {
+      lang = translations[selected] ? selected : "it"
+      languageSelector.value = lang
+      document.documentElement.lang = lang
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        el.textContent = t(el.dataset.i18n)
+      })
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        el.placeholder = t(el.dataset.i18nPlaceholder)
+      })
+      updateTitle()
+
+      // i messaggi di errore gia' mostrati vanno ritradotti
+      if (form.classList.contains("was-validated")) {
+        Object.keys(FIELDS).forEach(validateField)
+        validateField("country")
+        validateField("store")
+      }
+    }
+
+    languageSelector.addEventListener("change", event => applyLanguage(event.target.value))
+
+    // ---------------------------------------------------------------------------
+    // Invio
+    // ---------------------------------------------------------------------------
+    form.addEventListener("submit", event => {
+      const valid = validateAll()
+      form.classList.add("was-validated")
+      if (!valid || !form.checkValidity() || !storeSelect.value) {
+        event.preventDefault()
+        event.stopPropagation()
+        const firstInvalid = form.querySelector(":invalid")
+        if (firstInvalid) firstInvalid.focus()
+        return
+      }
+      form.action = ENDPOINT + storeSelect.value
+      submitButton.disabled = true
+    }, false)
+
+    // ---------------------------------------------------------------------------
+    // Avvio: parametri passati dallo store che linka la pagina
+    // (es. /fatture.html?store=ad&lang=en)
+    // ---------------------------------------------------------------------------
+    const params = new URLSearchParams(window.location.search)
+    const storeFromUrl = resolveStore(params.get("store") || params.get("shop") || params.get("negozio"))
+
+    applyStore(storeFromUrl)
+    if (storeFromUrl) storeRow.classList.add("d-none")
+
+    const langFromUrl = (params.get("lang") || params.get("lingua") || "").toLowerCase()
+    applyLanguage(translations[langFromUrl] ? langFromUrl : "it")
+  </script>
 </body>
 
 </html>
