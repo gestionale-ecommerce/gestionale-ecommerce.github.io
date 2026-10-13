@@ -965,18 +965,46 @@
     // ---------------------------------------------------------------------------
     // Invio
     // ---------------------------------------------------------------------------
-    form.addEventListener("submit", event => {
+    // La partita iva viene verificata sul server (cifra di controllo del paese) prima
+    // dell'invio: se non e' valida il modulo non parte e il campo mostra l'errore.
+    // Se il server non risponde si invia comunque: il controllo viene ripetuto all'arrivo.
+    async function pivaAcceptedByServer() {
+      const piva = document.getElementById("piva").value
+      const url = ENDPOINT + "piva?country=" + encodeURIComponent(currentCountry()) + "&piva=" + encodeURIComponent(piva)
+      try {
+        const response = await fetch(url, { signal: AbortSignal.timeout(8000) })
+        if (!response.ok) return true
+        return (await response.json()).valida !== false
+      } catch (error) {
+        return true
+      }
+    }
+
+    function markPivaInvalid() {
+      const el = document.getElementById("piva")
+      el.setCustomValidity(t("pivaInvalid"))
+      setFeedback("piva", "pivaInvalid")
+      el.focus()
+    }
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault()
+      event.stopPropagation()
       const valid = validateAll()
       form.classList.add("was-validated")
       if (!valid || !form.checkValidity() || !storeSelect.value) {
-        event.preventDefault()
-        event.stopPropagation()
         const firstInvalid = form.querySelector(":invalid")
         if (firstInvalid) firstInvalid.focus()
         return
       }
-      form.action = ENDPOINT + storeSelect.value
       submitButton.disabled = true
+      if (!(await pivaAcceptedByServer())) {
+        submitButton.disabled = false
+        markPivaInvalid()
+        return
+      }
+      form.action = ENDPOINT + storeSelect.value
+      form.submit()
     }, false)
 
     // ---------------------------------------------------------------------------
